@@ -26,6 +26,7 @@ void remove(int k){
 
 int main(){
 	int m;cin>>m;
+	init();
 	while(m--){
 		char c;
 		cin>>c;
