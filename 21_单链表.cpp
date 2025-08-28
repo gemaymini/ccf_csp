@@ -1,60 +1,48 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 const int N=1e5+10;
-int head=-1,idx=0,e[N],ne[N];
-
-void add_to_head(int x){
-	e[idx]=x;
-	ne[idx]=head;
-	head=idx++;
+int head,idx,e[N],ne[N];
+void init(){
+	head=-1;
+	idx=0;
 }
-
-void remove(int x){
-	if(x==0){
-		head=ne[head];
-		return;
-	}
-	ne[x]=ne[ne[x]];
-
-}
-
-void insert(int x,int k){
+void insert(int k,int x){
 	e[idx]=x;
 	ne[idx]=ne[k];
 	ne[k]=idx;
 	idx++;
 }
+
+void add_head(int x){
+	e[idx]=x;
+	ne[idx]=head;
+	head=idx++;
+}
+
+void remove(int k){
+	ne[k]=ne[ne[k]];
+}
+
 int main(){
 	int m;cin>>m;
 	while(m--){
 		char c;
 		cin>>c;
-		switch(c){
-			case 'H':
-			{
-				int x;
-				cin>>x;
-				add_to_head(x);
-				break;
-			}
-			case 'D':{
-				int k;cin>>k;
+		if(c=='H'){
+			int x;cin>>x;
+			add_head(x);
+		}else if(c=='D'){
+			int k;cin>>k;
+			if(k==0)
+				head=ne[head];
+			else{
 				remove(k-1);
-				break;
 			}
-			case 'I':
-			{
-				int k,x;
-				cin>>k>>x;
-				insert(k,x);
-				break;
-			}
+		}else{
+			int k,x;cin>>k>>x;
+			insert(k-1,x);
 		}
 	}
-	int i=head;
-
-	do{
-		cout<<e[i]<<" ";
-		i=ne[i];
-	}while(ne[i]!=0);
+	for(int i=head;i!=-1;i=ne[i])cout<<e[i]<<" ";
 }
