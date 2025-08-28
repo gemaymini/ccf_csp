@@ -51,4 +51,10 @@ int main(){
 			}
 		}
 	}
+	int i=head;
+
+	do{
+		cout<<e[i]<<" ";
+		i=ne[i];
+	}while(ne[i]!=0);
 }
