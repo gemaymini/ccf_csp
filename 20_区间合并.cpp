@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 const int N=1e5+20;
-typedef PII pair<int,int>
+typedef pair<int,int> PII;
 
 vector<PII> seg;
 
@@ -10,7 +10,7 @@ int main(){
     cin>>n;
     for(int i=0;i<n;i++){
         int l,r;cin>>l>>r;
-        seg.push_back({l,r})
+        seg.push_back({l,r});
     }
     sort(seg.begin(),seg.end());
     int ll=seg[0].first,rr=seg[0].second;
@@ -24,5 +24,5 @@ int main(){
             rr=r;
         }
     }
-    cout<<res;
+    cout<<res+1;
 }
