@@ -1,17 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-const int N=1e5+10;
+const int N=1e5;
 int head,idx,e[N],ne[N];
+
 void init(){
 	head=-1;
 	idx=0;
-}
-void insert(int k,int x){
-	e[idx]=x;
-	ne[idx]=ne[k];
-	ne[k]=idx;
-	idx++;
 }
 
 void add_head(int x){
@@ -20,12 +15,20 @@ void add_head(int x){
 	head=idx++;
 }
 
-void remove(int k){
-	ne[k]=ne[ne[k]];
+void remove(int x){
+	ne[x]=ne[ne[x]];
+}
+
+void insert(int k,int x){
+	e[idx]=x;
+	ne[idx]=ne[k];
+	ne[k]=idx;
+	idx++;
 }
 
 int main(){
-	int m;cin>>m;
+	int m;
+	cin>>m;
 	init();
 	while(m--){
 		char c;
@@ -37,13 +40,14 @@ int main(){
 			int k;cin>>k;
 			if(k==0)
 				head=ne[head];
-			else{
+			else	
 				remove(k-1);
-			}
 		}else{
-			int k,x;cin>>k>>x;
+			int x,k;
+			cin>>k>>x;
 			insert(k-1,x);
 		}
 	}
 	for(int i=head;i!=-1;i=ne[i])cout<<e[i]<<" ";
+	return 0;
 }
