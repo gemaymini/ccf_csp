@@ -15,15 +15,13 @@ int main() {
 		cin >> b[i];
 	
 	for(int i=1;i<=n;i++){
+		int maxv=1;
 		for(int j=1;j<=n;j++){
 			d[i][j]=max(d[i][j],d[i-1][j]);
 			if(a[i]==b[j]){
-				d[i][j]=max(d[i][j],1);				
-				for(int k=1;k<j;k++){
-					if(a[i]>b[k])
-						d[i][j]=max(d[i][j],d[i-1][k]+1);
-				}
+				d[i][j]=max(d[i][j],maxv);				
 			}
+			if(a[i]>b[j])maxv=max(maxv,d[i-1][j]+1);
 		}
 	}
 	int ans=0;
